@@ -287,6 +287,22 @@
         padding-bottom: 3rem;
       }
     }
+
+    /* Petits styles pour le formulaire */
+    form.card label {
+      display:block;
+      margin-top:0.8rem;
+      margin-bottom:0.2rem;
+      font-size:0.9rem;
+    }
+    form.card select,
+    form.card input {
+      width:100%;
+      padding:0.4rem 0.6rem;
+      border-radius:0.4rem;
+      border:1px solid #d0d4e4;
+      font-size:0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -315,7 +331,7 @@
         </p>
         <a href="#livre" class="btn-primary">Découvrir l’album</a>
         <a href="#pro" class="btn-ghost">Infos librairies & bibliothèques</a>
-        <!-- bouton Commander blanc supprimé ici -->
+        <a href="#commande" class="btn-primary">Commander</a>
       </div>
 
       <div class="hero-book">
@@ -331,7 +347,6 @@
           <img src="ImageNubi.png" alt="Couverture du livre Le Petit Nuage Qui Avait Peur de Pleuvoir" />
         </div>
 
-        <!-- bouton bleu → formulaire -->
         <a href="#commande" class="btn-order">
           Commander
         </a>
@@ -370,11 +385,10 @@
           <li><strong>Format :</strong> 21 × 27 cm</li>
           <li><strong>Pagination :</strong> 40 pages couleur</li>
           <li><strong>Couverture :</strong> Cartonnée premium</li>
-          <li><strong>Prix public :</strong> 13,99 € TTC</li>
+          <li><strong>Prix public :</strong> 14,49 € HT</li>
           <li><strong>Éditeur :</strong> Éditions Nubi</li>
           <li><strong>ISBN :</strong> à compléter</li>
         </ul>
-        <!-- deuxième bouton bleu → formulaire -->
         <a href="#commande" class="btn-order">
           Commander
         </a>
@@ -571,8 +585,7 @@
       <!-- Livre -->
       <label for="livre"><strong>Livre souhaité</strong></label>
       <select id="livre" name="livre" required>
-        <option value="Nubi">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
-        <!-- Plus tard tu pourras ajouter d’autres titres ici -->
+        <option value="Le Petit Nuage Qui Avait Peur de Pleuvoir">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
       </select>
 
       <!-- Quantité -->
@@ -599,10 +612,10 @@
       </div>
 
       <div style="margin-top:0.5rem;">
-        <label for="total"><strong>Total TTC</strong></label>
+        <label for="total"><strong>Total HT</strong></label>
         <input type="text" id="total" readonly />
         <small style="display:block; font-size:0.8rem; color:#666;">
-          Prix unitaire : 14,49 € • 16,99 $ • 10 000 FCFA
+          Prix unitaire HT : 14,49 € • 16,99 $ • 10 000 FCFA
         </small>
       </div>
 
@@ -623,13 +636,13 @@
       <div id="whatsapp-block" style="margin-top:0.8rem; display:none;">
         <label for="whatsappClient"><strong>Votre numéro WhatsApp</strong></label>
         <div style="display:flex; gap:0.5rem; align-items:center;">
-          <span>+225</span>
+          <span id="indicatif">+225</span>
           <input type="tel" id="whatsappClient" placeholder="0700000000" maxlength="10" />
         </div>
       </div>
 
       <!-- Bouton envoyer -->
-      <button type="button" id="btnEnvoyer" class="btn-primary" style="margin-top:1.5rem;">
+      <button type="button" id="btnEnvoyer" class="btn-order" style="margin-top:1.5rem;">
         Envoyer la commande
       </button>
 
@@ -667,16 +680,18 @@
 </footer>
 
 <script>
-  // Gérer l'année dans le footer
+  // Année du footer
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Données pays par région (exemple réduit, tu pourras en ajouter)
+  // Pays par région
   const paysParRegion = {
     afrique: [
-      "Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée", "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"
+      "Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée",
+      "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"
     ],
     europe: [
-      "France", "Belgique", "Suisse", "Allemagne", "Espagne", "Italie", "Portugal", "Pays-Bas"
+      "France", "Belgique", "Suisse", "Allemagne", "Espagne", "Italie",
+      "Portugal", "Pays-Bas"
     ],
     amerique: [
       "Canada", "États-Unis", "Brésil", "Mexique"
@@ -684,6 +699,40 @@
     asie: [
       "Chine", "Japon", "Inde", "Corée du Sud", "Émirats Arabes Unis"
     ]
+  };
+
+  // Indicatifs par pays
+  const indicatifParPays = {
+    "Côte d'Ivoire": "+225",
+    "Sénégal": "+221",
+    "Mali": "+223",
+    "Burkina Faso": "+226",
+    "Togo": "+228",
+    "Bénin": "+229",
+    "Guinée": "+224",
+    "Cameroun": "+237",
+    "Congo": "+242",
+    "RDC": "+243",
+    "Maroc": "+212",
+    "Algérie": "+213",
+    "Tunisie": "+216",
+    "France": "+33",
+    "Belgique": "+32",
+    "Suisse": "+41",
+    "Allemagne": "+49",
+    "Espagne": "+34",
+    "Italie": "+39",
+    "Portugal": "+351",
+    "Pays-Bas": "+31",
+    "Canada": "+1",
+    "États-Unis": "+1",
+    "Brésil": "+55",
+    "Mexique": "+52",
+    "Chine": "+86",
+    "Japon": "+81",
+    "Inde": "+91",
+    "Corée du Sud": "+82",
+    "Émirats Arabes Unis": "+971"
   };
 
   const regionSelect = document.getElementById('region');
@@ -703,6 +752,7 @@
   const whatsappClientInput = document.getElementById('whatsappClient');
   const btnEnvoyer = document.getElementById('btnEnvoyer');
   const msgInfo = document.getElementById('msgInfo');
+  const indicatifSpan = document.getElementById('indicatif');
 
   // Remplir pays selon région
   regionSelect.addEventListener('change', () => {
@@ -721,13 +771,23 @@
     }
   });
 
-  // Gestion Côte d’Ivoire → zones
+  // Gestion Côte d’Ivoire + indicatif
   paysSelect.addEventListener('change', () => {
-    if (regionSelect.value === 'afrique' && paysSelect.value === "Côte d'Ivoire") {
+    const pays = paysSelect.value;
+
+    // Zones CI
+    if (regionSelect.value === 'afrique' && pays === "Côte d'Ivoire") {
       zoneCIBlock.style.display = 'block';
     } else {
       zoneCIBlock.style.display = 'none';
       villeInterieurBlock.style.display = 'none';
+    }
+
+    // Indicatif WhatsApp
+    if (indicatifParPays[pays]) {
+      indicatifSpan.textContent = indicatifParPays[pays];
+    } else {
+      indicatifSpan.textContent = "+";
     }
   });
 
@@ -822,7 +882,7 @@
     });
   });
 
-  // Envoi du formulaire (redirige vers mail ou WhatsApp)
+  // Envoi du formulaire
   btnEnvoyer.addEventListener('click', () => {
     msgInfo.textContent = '';
 
@@ -861,12 +921,12 @@
       `Livre : ${livre}\n` +
       `Quantité : ${qte}\n` +
       `Devise : ${devise}\n` +
-      `Total estimé : ${total}\n`;
+      `Total estimé HT : ${total}\n`;
 
     const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
 
+    // Si Afrique mais pas Côte d'Ivoire → e-mail obligatoire
     if (region === 'afrique' && pays !== "Côte d'Ivoire") {
-      // Rediriger vers l’e-mail générique
       const subject = encodeURIComponent('Commande livre – Éditions Nubi');
       const body = encodeURIComponent(resume + '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.');
       window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
@@ -889,13 +949,14 @@
       msgInfo.style.color = '#333';
     } else {
       const numero = whatsappClientInput.value.trim();
-      if (!numero || numero.length !== 10) {
-        msgInfo.textContent = 'Merci de renseigner un numéro WhatsApp valide (10 chiffres après +225).';
+      if (!numero) {
+        msgInfo.textContent = 'Merci de renseigner votre numéro WhatsApp.';
         msgInfo.style.color = 'red';
         return;
       }
-      const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : +225${numero}`);
-      // ton WhatsApp : +225 0709850776 → sans espaces : 2250709850776
+      const indicatifClient = indicatifSpan.textContent || '+';
+      const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`);
+      // Ton WhatsApp : +225 0709850776 → 2250709850776
       const telDestination = '2250709850776';
       window.open(`https://wa.me/${telDestination}?text=${texte}`, '_blank');
       msgInfo.textContent = 'Une fenêtre WhatsApp va s’ouvrir pour envoyer votre commande.';
