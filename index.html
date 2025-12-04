@@ -955,99 +955,129 @@
     location.hash = '#commande';
   }
 
-  // Envoi du formulaire
-  btnEnvoyer.addEventListener('click', () => {
-    msgInfo.textContent = '';
+// Envoi du formulaire (CODE À REMPLACER)
+btnEnvoyer.addEventListener('click', () => {
+    msgInfo.textContent = ''; // Réinitialiser le message d'erreur
 
     const region = regionSelect.value;
     const pays = paysSelect.value;
-    const livre = document.getElementById('livre').value;
     const statut = statutSelect.value;
+    const livre = document.getElementById('livre').value;
     const qte = getQuantite();
     const devise = deviseSelect.value;
     const total = totalInput.value || '(à calculer)';
+    
+    // --- NOUVELLE LOGIQUE DE VALIDATION ---
+    
+    // 1. Vérifier les champs principaux
+    if (!region || !pays || !statut || !livre) {
+        msgInfo.textContent = 'Merci de sélectionner une Région, un Pays et un Statut avant envoi.';
+        msgInfo.style.color = 'red';
+        return;
+    }
+
+    // 2. Vérifier la quantité
+    if (!qte || qte <= 0) {
+        msgInfo.textContent = 'Merci d’indiquer une quantité de livres (au moins 1).';
+        msgInfo.style.color = 'red';
+        return;
+    }
+
+    // 3. Gestion spécifique Côte d’Ivoire
     let zone = '';
     let villeInterieur = '';
-
-    // Vérifier les champs principaux (sans la quantité)
-    if (!region || !pays || !statut || !livre) {
-      msgInfo.textContent = 'Merci de remplir tous les champs principaux avant envoi.';
-      msgInfo.style.color = 'red';
-      return;
-    }
-
-    // Vérifier la quantité séparément
-    if (!qte || qte <= 0) {
-      msgInfo.textContent = 'Merci d’indiquer une quantité de livres (au moins 1).';
-      msgInfo.style.color = 'red';
-      return;
-    }
-
     if (region === 'afrique' && pays === "Côte d'Ivoire") {
-      zone = zoneCISelect.value || '';
-      if (zone === 'Interieur') {
-        villeInterieur = villeInterieurBlock.style.display === 'block'
-          ? (document.getElementById('villeInterieur').value || '')
-          : '';
-      }
+        zone = zoneCISelect.value || '';
+        if (!zone) {
+            msgInfo.textContent = 'Veuillez choisir une zone pour la Côte d’Ivoire.';
+            msgInfo.style.color = 'red';
+            return;
+        }
+
+        if (zone === 'Interieur') {
+            villeInterieur = document.getElementById('villeInterieur').value.trim();
+            if (!villeInterieur) {
+                msgInfo.textContent = 'Veuillez renseigner le nom de la ville pour l’expédition en intérieur.';
+                msgInfo.style.color = 'red';
+                return;
+            }
+        }
     }
+    
+    // 4. Déterminer le mode d'envoi et valider les coordonnées de contact
+    const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
+    let email = '';
+    let numero = '';
+    let indicatifClient = '';
+    
+    if (modeEnvoi === 'email') {
+        email = emailClientInput.value.trim();
+        if (!email) {
+            msgInfo.textContent = 'Merci de renseigner votre adresse e-mail.';
+            msgInfo.style.color = 'red';
+            return;
+        }
+    } else if (modeEnvoi === 'whatsapp') {
+        numero = whatsappClientInput.value.trim();
+        if (!numero) {
+            msgInfo.textContent = 'Merci de renseigner votre numéro WhatsApp.';
+            msgInfo.style.color = 'red';
+            return;
+        }
+        // Vérification de la longueur du numéro
+        const longueurAttendue = longueurTelParPays[pays] || 10;
+        if (numero.length !== longueurAttendue) {
+             msgInfo.textContent = `Le numéro de téléphone pour ${pays} doit comporter ${longueurAttendue} chiffres.`;
+             msgInfo.style.color = 'red';
+             return;
+        }
+        indicatifClient = indicatifSpan.textContent || '+';
+    }
+    
+    // --- FIN DE LA LOGIQUE DE VALIDATION ---
 
     const ligneZone = (zone ? `Zone CI : ${zone}${villeInterieur ? ' / Ville : ' + villeInterieur : ''}\n` : '');
     const resume =
-      `Nouvelle commande Éditions Nubi\n\n` +
-      `Région : ${region}\n` +
-      `Pays : ${pays}\n` +
-      ligneZone +
-      `Statut : ${statut}\n` +
-      `Livre : ${livre}\n` +
-      `Quantité : ${qte}\n` +
-      `Devise : ${devise}\n` +
-      `Total estimé HT : ${total}\n`;
+        `Nouvelle commande Éditions Nubi\n\n` +
+        `Région : ${region}\n` +
+        `Pays : ${pays}\n` +
+        ligneZone +
+        `Statut : ${statut}\n` +
+        `Livre : ${livre}\n` +
+        `Quantité : ${qte}\n` +
+        `Devise : ${devise}\n` +
+        `Total estimé HT : ${total}\n`;
 
-    const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
-
-    // Si Afrique mais pas Côte d'Ivoire → e-mail obligatoire
+    
+    // Si Afrique mais pas Côte d'Ivoire → e-mail obligatoire (Logique conservée)
     if (region === 'afrique' && pays !== "Côte d'Ivoire") {
-      const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(resume + '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.');
-      window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
-      msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
-      msgInfo.style.color = '#333';
-      montrerConfirmation('email');
-      return;
+        const subject = encodeURIComponent('Commande livre – Éditions Nubi');
+        const body = encodeURIComponent(resume + '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.');
+        window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
+        msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
+        msgInfo.style.color = '#333';
+        montrerConfirmation('email');
+        return;
     }
 
     if (modeEnvoi === 'email') {
-      const email = emailClientInput.value.trim();
-      if (!email) {
-        msgInfo.textContent = 'Merci de renseigner votre adresse e-mail.';
-        msgInfo.style.color = 'red';
-        return;
-      }
-      const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(resume + `\nE-mail du client : ${email}\n\nMerci de préciser vos coordonnées postales pour l’expédition.`);
-      window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
-      msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
-      msgInfo.style.color = '#333';
-      montrerConfirmation('email');
-    } else {
-      const numero = whatsappClientInput.value.trim();
-      if (!numero) {
-        msgInfo.textContent = 'Merci de renseigner votre numéro WhatsApp.';
-        msgInfo.style.color = 'red';
-        return;
-      }
-      const indicatifClient = indicatifSpan.textContent || '+';
-      const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`);
-      // Ton WhatsApp : +225 0709850776 → 2250709850776
-      const telDestination = '2250709850776';
-      window.open(`https://wa.me/${telDestination}?text=${texte}`, '_blank');
-      msgInfo.textContent = 'Une fenêtre WhatsApp va s’ouvrir pour envoyer votre commande.';
-      msgInfo.style.color = '#333';
-      montrerConfirmation('whatsapp');
+        const subject = encodeURIComponent('Commande livre – Éditions Nubi');
+        const body = encodeURIComponent(resume + `\nE-mail du client : ${email}\n\nMerci de préciser vos coordonnées postales pour l’expédition.`);
+        window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
+        msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
+        msgInfo.style.color = '#333';
+        montrerConfirmation('email');
+    } else { // modeEnvoi === 'whatsapp'
+        const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`);
+        // Ton WhatsApp : +225 0709850776 → 2250709850776
+        const telDestination = '2250709850776';
+        window.open(`https://wa.me/${telDestination}?text=${texte}`, '_blank');
+        msgInfo.textContent = 'Une fenêtre WhatsApp va s’ouvrir pour envoyer votre commande.';
+        msgInfo.style.color = '#333';
+        montrerConfirmation('whatsapp');
     }
-  });
-
+});
+  
   // Initialiser quantités et total
   majQuantites();
   calculerTotal();
@@ -1055,4 +1085,5 @@
 
 </body>
 </html>
+
 
