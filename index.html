@@ -585,8 +585,8 @@
       <!-- Livre -->
       <label for="livre"><strong>Livre souhaité</strong></label>
       <select id="livre" name="livre" required>
-        <option value="">Choisissez un livre</option>
-        <option value="Le Petit Nuage Qui Avait Peur de Pleuvoir">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
+        <option value="" disabled selected>Choisissez un livre</option>
+        <option value="nubi">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
       </select>
 
       <!-- Quantité -->
@@ -787,6 +787,7 @@
   const zoneCISelect = document.getElementById('zoneCI');
   const villeInterieurBlock = document.getElementById('ville-interieur-block');
   const statutSelect = document.getElementById('statut');
+  const livreSelect = document.getElementById('livre');
   const quantiteSelect = document.getElementById('quantite');
   const quantitePersBlock = document.getElementById('quantite-pers-block');
   const quantitePersInput = document.getElementById('quantitePerso');
@@ -877,6 +878,14 @@
     });
   }
 
+  // Vérification robuste : on s'assure qu'on n'est pas sur la première option
+    const livre = livreSelect.value;
+    if (livreSelect.selectedIndex <= 0 || !livre) {
+    msgInfo.textContent = 'Merci de sélectionner un livre.';
+    msgInfo.style.color = 'red';
+    return;
+}
+  
   statutSelect.addEventListener('change', majQuantites);
 
   quantiteSelect.addEventListener('change', () => {
@@ -1104,5 +1113,6 @@ btnEnvoyer.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
