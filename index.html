@@ -585,8 +585,7 @@
       <!-- Livre -->
       <label for="livre"><strong>Livre souhaité</strong></label>
       <select id="livre" name="livre" required>
-        <option value="" disabled selected>Choisissez un livre</option>
-        <option value="nubi">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
+        <option value="nubi" selected>Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
       </select>
 
       <!-- Quantité -->
@@ -998,12 +997,6 @@
       return;
     }
 
-    if (!livre) {
-      msgInfo.textContent = 'Merci de sélectionner un livre.';
-      msgInfo.style.color = 'red';
-      return;
-    }
-
     if (!qte || qte <= 0) {
       msgInfo.textContent = 'Merci d’indiquer une quantité de livres (au moins 1).';
       msgInfo.style.color = 'red';
@@ -1106,3 +1099,4 @@
 
 </body>
 </html>
+
