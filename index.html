@@ -863,9 +863,9 @@
 
     let options = [];
     if (statut === 'librairie' || statut === 'ecole' || statut === 'bibliotheque') {
-      options = ['5','10','20','30','50','personnaliser'];
+      options = ['0','5','10','20','30','50','personnaliser'];
     } else if (statut === 'parent' || statut === 'psychologue' || statut === 'autre') {
-      options = ['1','2','3','5','7','10','personnaliser'];
+      options = ['0','1','2','3','5','7','10','personnaliser'];
     }
 
     options.forEach(val => {
@@ -1085,5 +1085,6 @@ btnEnvoyer.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
