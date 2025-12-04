@@ -585,6 +585,7 @@
       <!-- Livre -->
       <label for="livre"><strong>Livre souhaité</strong></label>
       <select id="livre" name="livre" required>
+        <option value="">Choisissez un livre</option>
         <option value="Le Petit Nuage Qui Avait Peur de Pleuvoir">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
       </select>
 
@@ -603,8 +604,8 @@
 
       <!-- Devise & prix -->
       <div style="margin-top:1rem;">
-        <label for="devise"><strong>Devise</strong></label>
-        <select id="devise" name="devise">
+        <select id="devise" name="devise" required>
+          <option value="">Choisissez une devise</option>
           <option value="EUR">Euro (€)</option>
           <option value="USD">Dollar ($)</option>
           <option value="XOF">Franc CFA (FCFA)</option>
@@ -1103,4 +1104,5 @@ btnEnvoyer.addEventListener('click', () => {
 
 </body>
 </html>
+
 
