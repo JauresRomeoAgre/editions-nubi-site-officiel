@@ -287,22 +287,6 @@
         padding-bottom: 3rem;
       }
     }
-
-    /* Petits styles pour le formulaire */
-    form.card label {
-      display:block;
-      margin-top:0.8rem;
-      margin-bottom:0.2rem;
-      font-size:0.9rem;
-    }
-    form.card select,
-    form.card input {
-      width:100%;
-      padding:0.4rem 0.6rem;
-      border-radius:0.4rem;
-      border:1px solid #d0d4e4;
-      font-size:0.9rem;
-    }
   </style>
 </head>
 <body>
@@ -347,7 +331,10 @@
           <img src="ImageNubi.png" alt="Couverture du livre Le Petit Nuage Qui Avait Peur de Pleuvoir" />
         </div>
 
-        <a href="#commande" class="btn-order">
+        <a
+          href="mailto:contact@editionsnubi.com?subject=Commande%20-%20Le%20Petit%20Nuage%20Qui%20Avait%20Peur%20de%20Pleuvoir&body=Bonjour,%0A%0AJe souhaite commander l’album « Le Petit Nuage Qui Avait Peur de Pleuvoir ».%0A%0ANom : %0APrénom : %0AAdresse de livraison : %0AQuantité : %0A%0AMerci.%0A"
+          class="btn-order"
+        >
           Commander
         </a>
       </div>
@@ -389,7 +376,10 @@
           <li><strong>Éditeur :</strong> Éditions Nubi</li>
           <li><strong>ISBN :</strong> à compléter</li>
         </ul>
-        <a href="#commande" class="btn-order">
+        <a
+          href="mailto:contact@editionsnubi.com?subject=Commande%20-%20Le%20Petit%20Nuage%20Qui%20Avait%20Peur%20de%20Pleuvoir&body=Bonjour,%0A%0AJe souhaite commander l’album « Le Petit Nuage Qui Avait Peur de Pleuvoir ».%0A%0ANom : %0APrénom : %0AAdresse de livraison : %0AQuantité : %0A%0AMerci.%0A"
+          class="btn-order"
+        >
           Commander
         </a>
       </div>
@@ -585,14 +575,13 @@
       <!-- Livre -->
       <label for="livre"><strong>Livre souhaité</strong></label>
       <select id="livre" name="livre" required>
-        <option value="Le Petit Nuage Qui Avait Peur de Pleuvoir">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
+        <option value="Nubi">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
       </select>
 
       <!-- Quantité -->
       <div id="quantite-block">
         <label for="quantite"><strong>Quantité</strong></label>
         <select id="quantite" name="quantite">
-          <!-- Options remplies dynamiquement selon le statut -->
         </select>
 
         <div id="quantite-pers-block" style="margin-top:0.5rem; display:none;">
@@ -636,8 +625,8 @@
       <div id="whatsapp-block" style="margin-top:0.8rem; display:none;">
         <label for="whatsappClient"><strong>Votre numéro WhatsApp</strong></label>
         <div style="display:flex; gap:0.5rem; align-items:center;">
-          <span id="indicatif">+225</span>
-          <input type="tel" id="whatsappClient" placeholder="0700000000" maxlength="10" />
+          <span id="indicatifWhatsApp">+225</span>
+          <input type="tel" id="whatsappClient" placeholder="0700000000" />
         </div>
       </div>
 
@@ -680,18 +669,16 @@
 </footer>
 
 <script>
-  // Année du footer
+  // Gérer l'année dans le footer
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Pays par région
+  // Données pays par région
   const paysParRegion = {
     afrique: [
-      "Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée",
-      "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"
+      "Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée", "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"
     ],
     europe: [
-      "France", "Belgique", "Suisse", "Allemagne", "Espagne", "Italie",
-      "Portugal", "Pays-Bas"
+      "France", "Belgique", "Suisse", "Allemagne", "Espagne", "Italie", "Portugal", "Pays-Bas"
     ],
     amerique: [
       "Canada", "États-Unis", "Brésil", "Mexique"
@@ -701,38 +688,41 @@
     ]
   };
 
-  // Indicatifs par pays
-  const indicatifParPays = {
-    "Côte d'Ivoire": "+225",
-    "Sénégal": "+221",
-    "Mali": "+223",
-    "Burkina Faso": "+226",
-    "Togo": "+228",
-    "Bénin": "+229",
-    "Guinée": "+224",
-    "Cameroun": "+237",
-    "Congo": "+242",
-    "RDC": "+243",
-    "Maroc": "+212",
-    "Algérie": "+213",
-    "Tunisie": "+216",
-    "France": "+33",
-    "Belgique": "+32",
-    "Suisse": "+41",
-    "Allemagne": "+49",
-    "Espagne": "+34",
-    "Italie": "+39",
-    "Portugal": "+351",
-    "Pays-Bas": "+31",
-    "Canada": "+1",
-    "États-Unis": "+1",
-    "Brésil": "+55",
-    "Mexique": "+52",
-    "Chine": "+86",
-    "Japon": "+81",
-    "Inde": "+91",
-    "Corée du Sud": "+82",
-    "Émirats Arabes Unis": "+971"
+  // Formats téléphone par pays (indicatif + longueur du numéro local)
+  const phoneFormats = {
+    "Côte d'Ivoire": { code: "+225", length: 10 },
+    "Sénégal": { code: "+221", length: 9 },
+    "Mali": { code: "+223", length: 8 },
+    "Burkina Faso": { code: "+226", length: 8 },
+    "Togo": { code: "+228", length: 8 },
+    "Bénin": { code: "+229", length: 8 },
+    "Guinée": { code: "+224", length: 9 },
+    "Cameroun": { code: "+237", length: 9 },
+    "Congo": { code: "+242", length: 9 },
+    "RDC": { code: "+243", length: 9 },
+    "Maroc": { code: "+212", length: 9 },
+    "Algérie": { code: "+213", length: 9 },
+    "Tunisie": { code: "+216", length: 8 },
+
+    "France": { code: "+33", length: 9 },
+    "Belgique": { code: "+32", length: 9 },
+    "Suisse": { code: "+41", length: 9 },
+    "Allemagne": { code: "+49", length: 10 },
+    "Espagne": { code: "+34", length: 9 },
+    "Italie": { code: "+39", length: 10 },
+    "Portugal": { code: "+351", length: 9 },
+    "Pays-Bas": { code: "+31", length: 9 },
+
+    "Canada": { code: "+1", length: 10 },
+    "États-Unis": { code: "+1", length: 10 },
+    "Brésil": { code: "+55", length: 11 },
+    "Mexique": { code: "+52", length: 10 },
+
+    "Chine": { code: "+86", length: 11 },
+    "Japon": { code: "+81", length: 10 },
+    "Inde": { code: "+91", length: 10 },
+    "Corée du Sud": { code: "+82", length: 10 },
+    "Émirats Arabes Unis": { code: "+971", length: 9 }
   };
 
   const regionSelect = document.getElementById('region');
@@ -750,9 +740,11 @@
   const whatsappBlock = document.getElementById('whatsapp-block');
   const emailClientInput = document.getElementById('emailClient');
   const whatsappClientInput = document.getElementById('whatsappClient');
+  const indicatifWhatsApp = document.getElementById('indicatifWhatsApp');
   const btnEnvoyer = document.getElementById('btnEnvoyer');
   const msgInfo = document.getElementById('msgInfo');
-  const indicatifSpan = document.getElementById('indicatif');
+
+  let currentPhoneLength = 10; // longueur attendue pour le numéro local WhatsApp
 
   // Remplir pays selon région
   regionSelect.addEventListener('change', () => {
@@ -769,26 +761,34 @@
         paysSelect.appendChild(opt);
       });
     }
+
+    updateWhatsappFormat();
   });
 
-  // Gestion Côte d’Ivoire + indicatif
-  paysSelect.addEventListener('change', () => {
+  // Mise à jour de l’indicatif + longueur selon le pays
+  function updateWhatsappFormat() {
     const pays = paysSelect.value;
+    const format = phoneFormats[pays] || { code: "+225", length: 10 };
+    indicatifWhatsApp.textContent = format.code;
+    currentPhoneLength = format.length;
+    whatsappClientInput.maxLength = format.length;
+    if (format.length > 0) {
+      whatsappClientInput.placeholder = '0'.repeat(format.length);
+    } else {
+      whatsappClientInput.placeholder = '';
+    }
+    whatsappClientInput.value = '';
+  }
 
-    // Zones CI
-    if (regionSelect.value === 'afrique' && pays === "Côte d'Ivoire") {
+  // Gestion Côte d’Ivoire → zones
+  paysSelect.addEventListener('change', () => {
+    if (regionSelect.value === 'afrique' && paysSelect.value === "Côte d'Ivoire") {
       zoneCIBlock.style.display = 'block';
     } else {
       zoneCIBlock.style.display = 'none';
       villeInterieurBlock.style.display = 'none';
     }
-
-    // Indicatif WhatsApp
-    if (indicatifParPays[pays]) {
-      indicatifSpan.textContent = indicatifParPays[pays];
-    } else {
-      indicatifSpan.textContent = "+";
-    }
+    updateWhatsappFormat();
   });
 
   // Zone Intérieur → ville à saisir
@@ -835,7 +835,6 @@
   });
 
   deviseSelect.addEventListener('change', calculerTotal);
-
   quantitePersInput.addEventListener('input', calculerTotal);
 
   function getQuantite() {
@@ -921,11 +920,10 @@
       `Livre : ${livre}\n` +
       `Quantité : ${qte}\n` +
       `Devise : ${devise}\n` +
-      `Total estimé HT : ${total}\n`;
+      `Total estimé : ${total}\n`;
 
     const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
 
-    // Si Afrique mais pas Côte d'Ivoire → e-mail obligatoire
     if (region === 'afrique' && pays !== "Côte d'Ivoire") {
       const subject = encodeURIComponent('Commande livre – Éditions Nubi');
       const body = encodeURIComponent(resume + '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.');
@@ -949,14 +947,12 @@
       msgInfo.style.color = '#333';
     } else {
       const numero = whatsappClientInput.value.trim();
-      if (!numero) {
-        msgInfo.textContent = 'Merci de renseigner votre numéro WhatsApp.';
+      if (!numero || numero.length !== currentPhoneLength) {
+        msgInfo.textContent = `Merci de renseigner un numéro WhatsApp valide (${currentPhoneLength} chiffres attendus après l’indicatif).`;
         msgInfo.style.color = 'red';
         return;
       }
-      const indicatifClient = indicatifSpan.textContent || '+';
-      const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`);
-      // Ton WhatsApp : +225 0709850776 → 2250709850776
+      const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : ${indicatifWhatsApp.textContent}${numero}`);
       const telDestination = '2250709850776';
       window.open(`https://wa.me/${telDestination}?text=${texte}`, '_blank');
       msgInfo.textContent = 'Une fenêtre WhatsApp va s’ouvrir pour envoyer votre commande.';
@@ -964,9 +960,10 @@
     }
   });
 
-  // Initialiser quantités et total
+  // Initialiser quantités, total et format WhatsApp
   majQuantites();
   calculerTotal();
+  updateWhatsappFormat();
 </script>
 
 </body>
