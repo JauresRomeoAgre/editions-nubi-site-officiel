@@ -969,9 +969,27 @@ btnEnvoyer.addEventListener('click', () => {
     
     // --- NOUVELLE LOGIQUE DE VALIDATION ---
     
-    // 1. Vérifier les champs principaux
-    if (!region || !pays || !statut || !livre) {
-        msgInfo.textContent = 'Merci de sélectionner une Région, un Pays et un Statut avant envoi.';
+    // 1. Vérifier les champs principaux UN PAR UN
+    if (!region) {
+        msgInfo.textContent = 'Merci de sélectionner une région.';
+        msgInfo.style.color = 'red';
+        return;
+    }
+
+    if (!pays) {
+        msgInfo.textContent = 'Merci de sélectionner un pays.';
+        msgInfo.style.color = 'red';
+        return;
+    }
+
+    if (!statut) {
+        msgInfo.textContent = 'Merci de sélectionner un statut.';
+        msgInfo.style.color = 'red';
+        return;
+    }
+
+    if (!livre) {
+        msgInfo.textContent = 'Merci de sélectionner un livre.';
         msgInfo.style.color = 'red';
         return;
     }
@@ -1085,6 +1103,4 @@ btnEnvoyer.addEventListener('click', () => {
 
 </body>
 </html>
-
-
 
