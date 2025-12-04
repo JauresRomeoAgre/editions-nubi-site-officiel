@@ -331,7 +331,6 @@
         </p>
         <a href="#livre" class="btn-primary">Découvrir l’album</a>
         <a href="#pro" class="btn-ghost">Infos librairies & bibliothèques</a>
-        <a href="#commande" class="btn-primary">Commander</a>
       </div>
 
       <div class="hero-book">
@@ -972,7 +971,13 @@
     const region = regionSelect.value;
     const pays = paysSelect.value;
     const statut = statutSelect.value;
-    const livre = livreSelect.value;
+
+    // ⬇️ IMPORTANT : on récupère à la fois la valeur et le texte du livre
+    const livreValue = livreSelect.value;
+    const livreTexte = livreSelect.options[livreSelect.selectedIndex]
+        ? livreSelect.options[livreSelect.selectedIndex].text
+        : '';
+
     const qte = getQuantite();
     const devise = deviseSelect.value;
     const total = totalInput.value || '(à calculer)';
@@ -993,6 +998,12 @@
 
     if (!statut) {
       msgInfo.textContent = 'Merci de sélectionner un statut.';
+      msgInfo.style.color = 'red';
+      return;
+    }
+
+    if (!livreValue) {
+      msgInfo.textContent = 'Merci de sélectionner un livre.';
       msgInfo.style.color = 'red';
       return;
     }
@@ -1059,7 +1070,7 @@
       `Pays : ${pays}\n` +
       ligneZone +
       `Statut : ${statut}\n` +
-      `Livre : ${livre}\n` +
+      `Livre : ${livreTexte}\n` +
       `Quantité : ${qte}\n` +
       `Devise : ${devise}\n` +
       `Total estimé HT : ${total}\n`;
@@ -1099,4 +1110,5 @@
 
 </body>
 </html>
+
 
