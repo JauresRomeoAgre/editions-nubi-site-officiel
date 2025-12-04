@@ -969,8 +969,16 @@
     let zone = '';
     let villeInterieur = '';
 
-    if (!region || !pays || !statut || !livre || !qte) {
+    // Vérifier les champs principaux (sans la quantité)
+    if (!region || !pays || !statut || !livre) {
       msgInfo.textContent = 'Merci de remplir tous les champs principaux avant envoi.';
+      msgInfo.style.color = 'red';
+      return;
+    }
+
+    // Vérifier la quantité séparément
+    if (!qte || qte <= 0) {
+      msgInfo.textContent = 'Merci d’indiquer une quantité de livres (au moins 1).';
       msgInfo.style.color = 'red';
       return;
     }
@@ -1047,3 +1055,4 @@
 
 </body>
 </html>
+
