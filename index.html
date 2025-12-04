@@ -693,95 +693,33 @@
 </footer>
 
 <script>
-  // Année du footer
+  // --- 1. DONNÉES ET CONFIGURATION ---
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Pays par région
+  // Tes coordonnées pour la réception des commandes
+  const EMAIL_DESTINATION = "contact@editionsnubi.com";
+  const WHATSAPP_DESTINATION = "2250709850776"; // Format: 22507XXXXXXXX (pas de +)
+
   const paysParRegion = {
-    afrique: [
-      "Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée",
-      "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"
-    ],
-    europe: [
-      "France", "Belgique", "Suisse", "Allemagne", "Espagne", "Italie",
-      "Portugal", "Pays-Bas"
-    ],
-    amerique: [
-      "Canada", "États-Unis", "Brésil", "Mexique"
-    ],
-    asie: [
-      "Chine", "Japon", "Inde", "Corée du Sud", "Émirats Arabes Unis"
-    ]
+    afrique: ["Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée", "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"],
+    europe: ["France", "Belgique", "Suisse", "Allemagne", "Espagne", "Italie", "Portugal", "Pays-Bas"],
+    amerique: ["Canada", "États-Unis", "Brésil", "Mexique"],
+    asie: ["Chine", "Japon", "Inde", "Corée du Sud", "Émirats Arabes Unis"]
   };
 
-  // Indicatifs par pays
   const indicatifParPays = {
-    "Côte d'Ivoire": "+225",
-    "Sénégal": "+221",
-    "Mali": "+223",
-    "Burkina Faso": "+226",
-    "Togo": "+228",
-    "Bénin": "+229",
-    "Guinée": "+224",
-    "Cameroun": "+237",
-    "Congo": "+242",
-    "RDC": "+243",
-    "Maroc": "+212",
-    "Algérie": "+213",
-    "Tunisie": "+216",
-    "France": "+33",
-    "Belgique": "+32",
-    "Suisse": "+41",
-    "Allemagne": "+49",
-    "Espagne": "+34",
-    "Italie": "+39",
-    "Portugal": "+351",
-    "Pays-Bas": "+31",
-    "Canada": "+1",
-    "États-Unis": "+1",
-    "Brésil": "+55",
-    "Mexique": "+52",
-    "Chine": "+86",
-    "Japon": "+81",
-    "Inde": "+91",
-    "Corée du Sud": "+82",
-    "Émirats Arabes Unis": "+971"
+    "Côte d'Ivoire": "+225", "Sénégal": "+221", "Mali": "+223", "Burkina Faso": "+226", "Togo": "+228", "Bénin": "+229", "Guinée": "+224", "Cameroun": "+237", "Congo": "+242", "RDC": "+243", "Maroc": "+212", "Algérie": "+213", "Tunisie": "+216",
+    "France": "+33", "Belgique": "+32", "Suisse": "+41", "Allemagne": "+49", "Espagne": "+34", "Italie": "+39", "Portugal": "+351", "Pays-Bas": "+31",
+    "Canada": "+1", "États-Unis": "+1", "Brésil": "+55", "Mexique": "+52", "Chine": "+86", "Japon": "+81", "Inde": "+91", "Corée du Sud": "+82", "Émirats Arabes Unis": "+971"
   };
 
-  // Longueur de numéro (indicatif NON compris)
   const longueurTelParPays = {
-    "Côte d'Ivoire": 10,
-    "Sénégal": 9,
-    "Mali": 8,
-    "Burkina Faso": 8,
-    "Togo": 8,
-    "Bénin": 8,
-    "Guinée": 9,
-    "Cameroun": 9,
-    "Congo": 9,
-    "RDC": 9,
-    "Maroc": 9,
-    "Algérie": 9,
-    "Tunisie": 8,
-    "France": 10,
-    "Belgique": 9,
-    "Suisse": 9,
-    "Allemagne": 10,
-    "Espagne": 9,
-    "Italie": 10,
-    "Portugal": 9,
-    "Pays-Bas": 9,
-    "Canada": 10,
-    "États-Unis": 10,
-    "Brésil": 11,
-    "Mexique": 10,
-    "Chine": 11,
-    "Japon": 10,
-    "Inde": 10,
-    "Corée du Sud": 10,
-    "Émirats Arabes Unis": 9
+    "Côte d'Ivoire": 10, "Sénégal": 9, "Mali": 8, "Burkina Faso": 8, "Togo": 8, "Bénin": 8, "Guinée": 9, "Cameroun": 9, "Congo": 9, "RDC": 9, "Maroc": 9, "Algérie": 9, "Tunisie": 8,
+    "France": 10, "Belgique": 9, "Suisse": 9, "Allemagne": 10, "Espagne": 9, "Italie": 10, "Portugal": 9, "Pays-Bas": 9,
+    "Canada": 10, "États-Unis": 10, "Brésil": 11, "Mexique": 10, "Chine": 11, "Japon": 10, "Inde": 10, "Corée du Sud": 10, "Émirats Arabes Unis": 9
   };
 
+  // --- 2. SÉLECTION DES ÉLÉMENTS DOM ---
   const regionSelect = document.getElementById('region');
   const paysSelect = document.getElementById('pays');
   const zoneCIBlock = document.getElementById('zone-ci-block');
@@ -804,6 +742,8 @@
   const commandeForm = document.getElementById('commandeForm');
   const confirmationCard = document.getElementById('confirmationCard');
   const confirmationTexte = document.getElementById('confirmationTexte');
+
+  // --- 3. LOGIQUE DYNAMIQUE ---
 
   // Remplir pays selon région
   regionSelect.addEventListener('change', () => {
@@ -835,11 +775,7 @@
     }
 
     // Indicatif WhatsApp
-    if (indicatifParPays[pays]) {
-      indicatifSpan.textContent = indicatifParPays[pays];
-    } else {
-      indicatifSpan.textContent = "+";
-    }
+    indicatifSpan.textContent = indicatifParPays[pays] || "+";
 
     // Longueur et placeholder du numéro
     const longueur = longueurTelParPays[pays] || 10;
@@ -850,11 +786,7 @@
 
   // Zone Intérieur → ville à saisir
   zoneCISelect.addEventListener('change', () => {
-    if (zoneCISelect.value === 'Interieur') {
-      villeInterieurBlock.style.display = 'block';
-    } else {
-      villeInterieurBlock.style.display = 'none';
-    }
+    villeInterieurBlock.style.display = (zoneCISelect.value === 'Interieur') ? 'block' : 'none';
   });
 
   // Options de quantités selon statut
@@ -890,12 +822,8 @@
   statutSelect.addEventListener('change', majQuantites);
 
   quantiteSelect.addEventListener('change', () => {
-    if (quantiteSelect.value === 'personnaliser') {
-      quantitePersBlock.style.display = 'block';
-    } else {
-      quantitePersBlock.style.display = 'none';
-      quantitePersInput.value = '';
-    }
+    quantitePersBlock.style.display = (quantiteSelect.value === 'personnaliser') ? 'block' : 'none';
+    if (quantiteSelect.value !== 'personnaliser') quantitePersInput.value = '';
     calculerTotal();
   });
 
@@ -953,174 +881,118 @@
     confirmationCard.style.display = 'block';
 
     if (mode === 'email') {
-      confirmationTexte.textContent =
-        "Votre commande a été générée dans votre application e-mail. Vérifiez le message prérempli puis envoyez-le pour la finaliser.";
+      confirmationTexte.textContent = "Votre commande a été générée dans votre application e-mail. Vérifiez le message et envoyez-le.";
     } else if (mode === 'whatsapp') {
-      confirmationTexte.textContent =
-        "Une fenêtre WhatsApp s’est ouverte. Vérifiez le message prérempli puis envoyez-le pour finaliser votre commande.";
-    } else {
-      confirmationTexte.textContent =
-        "Votre commande a bien été préparée. Vous pouvez maintenant finaliser l’envoi dans votre application.";
+      confirmationTexte.textContent = "WhatsApp s'est ouvert. Vérifiez le message et envoyez-le pour valider la commande.";
     }
-
     location.hash = '#commande';
   }
 
-  // Envoi du formulaire
+  // --- 4. TRAITEMENT DE L'ENVOI (C'est ici que la magie opère) ---
   btnEnvoyer.addEventListener('click', () => {
     msgInfo.textContent = ''; // reset
 
+    // Récupération des valeurs
     const region = regionSelect.value;
     const pays = paysSelect.value;
     const statut = statutSelect.value;
-
-    // Livre : valeur + texte lisible
-    const livreValue = livreSelect.value;
-    const livreTexte = livreSelect.options[livreSelect.selectedIndex]
-      ? livreSelect.options[livreSelect.selectedIndex].text
-      : '';
-
+    const livreTexte = livreSelect.options[livreSelect.selectedIndex] ? livreSelect.options[livreSelect.selectedIndex].text : '';
     const qte = getQuantite();
     const devise = deviseSelect.value;
     const total = totalInput.value || '(à calculer)';
+    const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
 
     // VALIDATION
-    if (!region) {
-      msgInfo.textContent = 'Merci de sélectionner une région.';
-      msgInfo.style.color = 'red';
-      return;
-    }
+    if (!region) return afficherErreur('Merci de sélectionner une région.');
+    if (!pays) return afficherErreur('Merci de sélectionner un pays.');
+    if (!statut) return afficherErreur('Merci de sélectionner un statut.');
+    if (!qte || qte <= 0) return afficherErreur('Merci d’indiquer une quantité de livres (au moins 1).');
 
-    if (!pays) {
-      msgInfo.textContent = 'Merci de sélectionner un pays.';
-      msgInfo.style.color = 'red';
-      return;
-    }
-
-    if (!statut) {
-      msgInfo.textContent = 'Merci de sélectionner un statut.';
-      msgInfo.style.color = 'red';
-      return;
-    }
-
-    if (!qte || qte <= 0) {
-      msgInfo.textContent = 'Merci d’indiquer une quantité de livres (au moins 1).';
-      msgInfo.style.color = 'red';
-      return;
-    }
-
-    // Gestion spécifique Côte d’Ivoire
-    let zone = '';
-    let villeInterieur = '';
+    // Gestion Côte d’Ivoire
+    let detailsZone = '';
     if (region === 'afrique' && pays === "Côte d'Ivoire") {
-      zone = zoneCISelect.value || '';
-      if (!zone) {
-        msgInfo.textContent = 'Veuillez choisir une zone pour la Côte d’Ivoire.';
-        msgInfo.style.color = 'red';
-        return;
-      }
-
+      const zone = zoneCISelect.value;
+      if (!zone) return afficherErreur('Veuillez choisir une zone pour la Côte d’Ivoire.');
+      
+      let ville = '';
       if (zone === 'Interieur') {
-        villeInterieur = document.getElementById('villeInterieur').value.trim();
-        if (!villeInterieur) {
-          msgInfo.textContent = 'Veuillez renseigner le nom de la ville pour l’expédition en intérieur.';
-          msgInfo.style.color = 'red';
-          return;
-        }
+        ville = document.getElementById('villeInterieur').value.trim();
+        if (!ville) return afficherErreur('Veuillez renseigner le nom de la ville.');
+        detailsZone = `Zone CI : Intérieur / Ville : ${ville}\n`;
+      } else {
+        detailsZone = `Zone CI : ${zone}\n`;
       }
     }
 
-    const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
-    let email = '';
-    let numero = '';
-    let indicatifClient = '';
+    // Récupération Email ou WhatsApp selon le choix
+    let emailClient = '';
+    let numeroWhatsApp = '';
+    let numeroComplet = '';
 
     if (modeEnvoi === 'email') {
-      email = emailClientInput.value.trim();
-      if (!email) {
-        msgInfo.textContent = 'Merci de renseigner votre adresse e-mail.';
-        msgInfo.style.color = 'red';
-        return;
-      }
-    } else if (modeEnvoi === 'whatsapp') {
-      numero = whatsappClientInput.value.trim();
-      if (!numero) {
-        msgInfo.textContent = 'Merci de renseigner votre numéro WhatsApp.';
-        msgInfo.style.color = 'red';
-        return;
-      }
-      const longueurAttendue = longueurTelParPays[pays] || 10;
-      if (numero.length !== longueurAttendue) {
-        msgInfo.textContent = `Le numéro de téléphone pour ${pays} doit comporter ${longueurAttendue} chiffres.`;
-        msgInfo.style.color = 'red';
-        return;
-      }
-      indicatifClient = indicatifSpan.textContent || '+';
-    }
-
-    const ligneZone = (zone
-      ? `Zone CI : ${zone}${villeInterieur ? ' / Ville : ' + villeInterieur : ''}\n`
-      : '');
-
-    const resume =
-      `Nouvelle commande Éditions Nubi\n\n` +
-      `Région : ${region}\n` +
-      `Pays : ${pays}\n` +
-      ligneZone +
-      `Statut : ${statut}\n` +
-      `Livre : ${livreTexte}\n` +
-      `Quantité : ${qte}\n` +
-      `Devise : ${devise}\n` +
-      `Total estimé HT : ${total}\n`;
-
-    // Cas Afrique hors CI → email obligatoire
-    if (region === 'afrique' && pays !== "Côte d'Ivoire") {
-      const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(
-        resume +
-        '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.'
-      );
-      window.location.href =
-        `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
-      msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
-      msgInfo.style.color = '#333';
-      montrerConfirmation('email');
-      return;
-    }
-
-    if (modeEnvoi === 'email') {
-      const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(
-        resume +
-        `\nE-mail du client : ${email}\n\nMerci de préciser vos coordonnées postales pour l’expédition.`
-      );
-      window.location.href =
-        `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
-      msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
-      msgInfo.style.color = '#333';
-      montrerConfirmation('email');
+      emailClient = emailClientInput.value.trim();
+      if (!emailClient) return afficherErreur('Merci de renseigner votre adresse e-mail.');
     } else {
-      const texte = encodeURIComponent(
+      // Mode WhatsApp
+      const numSaisi = whatsappClientInput.value.trim();
+      if (!numSaisi) return afficherErreur('Merci de renseigner votre numéro WhatsApp.');
+      
+      const longueurAttendue = longueurTelParPays[pays] || 10;
+      if (numSaisi.length !== longueurAttendue) return afficherErreur(`Le numéro pour ${pays} doit comporter ${longueurAttendue} chiffres.`);
+      
+      numeroWhatsApp = numSaisi;
+      numeroComplet = (indicatifSpan.textContent || '+') + numSaisi;
+    }
+
+    // Construction du message
+    const resume =
+      `*Nouvelle commande Éditions Nubi*\n\n` +
+      `📍 Pays : ${pays}\n` +
+      detailsZone +
+      `👤 Statut : ${statut}\n` +
+      `📖 Livre : ${livreTexte}\n` +
+      `📦 Quantité : ${qte}\n` +
+      `💰 Total estimé : ${total}\n` +
+      `--------------------------------\n`;
+
+    // --- REDIRECTION ---
+
+    if (modeEnvoi === 'email') {
+      // Envoi par E-mail
+      const subject = encodeURIComponent('Commande livre – Éditions Nubi');
+      const body = encodeURIComponent(
         resume +
-        `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`
+        `E-mail client : ${emailClient}\n\n` +
+        `Merci de compléter vos coordonnées ci-dessous :\n` +
+        `Nom & Prénom :\nAdresse de livraison :\nNuméro de téléphone :\n`
       );
-      const telDestination = '2250709850776';
-      window.open(`https://wa.me/${telDestination}?text=${texte}`, '_blank');
-      msgInfo.textContent = 'Une fenêtre WhatsApp va s’ouvrir pour envoyer votre commande.';
-      msgInfo.style.color = '#333';
+      window.location.href = `mailto:${EMAIL_DESTINATION}?subject=${subject}&body=${body}`;
+      montrerConfirmation('email');
+
+    } else {
+      // Envoi par WhatsApp
+      const texteWhatsApp = encodeURIComponent(
+        resume +
+        `📞 Contact WhatsApp : ${numeroComplet}\n\n` +
+        `Bonjour, je souhaite commander ce livre. Voici mes infos :\n` +
+        `Nom & Prénom : `
+      );
+      // Utilisation de wa.me qui fonctionne mobile et desktop
+      window.open(`https://wa.me/${WHATSAPP_DESTINATION}?text=${texteWhatsApp}`, '_blank');
       montrerConfirmation('whatsapp');
     }
   });
 
-  // Initialiser quantités et total au chargement
+  function afficherErreur(msg) {
+    msgInfo.textContent = msg;
+    msgInfo.style.color = 'red';
+  }
+
+  // Initialisation
   majQuantites();
   calculerTotal();
 </script>
-
+  
 </body>
 </html>
-
-
-
-
 
