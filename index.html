@@ -745,7 +745,7 @@
     "Émirats Arabes Unis": "+971"
   };
 
-  // Longueur de numéro (indicatif NON compris, juste les chiffres que l’utilisateur tape)
+  // Longueur de numéro (indicatif NON compris)
   const longueurTelParPays = {
     "Côte d'Ivoire": 10,
     "Sénégal": 9,
@@ -867,7 +867,6 @@
     } else if (statut === 'parent' || statut === 'psychologue' || statut === 'autre') {
       options = ['0','1','2','3','5','7','10','personnaliser'];
     } else {
-      // Aucun statut sélectionné → message par défaut
       const opt = document.createElement('option');
       opt.value = '';
       opt.textContent = "Choisissez d’abord un statut";
@@ -920,6 +919,7 @@
       totalInput.value = '';
       return;
     }
+
     const total = qte * unit;
     if (deviseSelect.value === 'XOF') {
       totalInput.value = total.toLocaleString('fr-FR') + ' FCFA';
@@ -960,30 +960,28 @@
         "Votre commande a bien été préparée. Vous pouvez maintenant finaliser l’envoi dans votre application.";
     }
 
-    // Remonter vers la section commande
     location.hash = '#commande';
   }
 
   // Envoi du formulaire
   btnEnvoyer.addEventListener('click', () => {
-    msgInfo.textContent = ''; // Réinitialiser le message d'erreur
+    msgInfo.textContent = ''; // reset
 
     const region = regionSelect.value;
     const pays = paysSelect.value;
     const statut = statutSelect.value;
 
-    // ⬇️ IMPORTANT : on récupère à la fois la valeur et le texte du livre
+    // Livre : valeur + texte lisible
     const livreValue = livreSelect.value;
     const livreTexte = livreSelect.options[livreSelect.selectedIndex]
-        ? livreSelect.options[livreSelect.selectedIndex].text
-        : '';
+      ? livreSelect.options[livreSelect.selectedIndex].text
+      : '';
 
     const qte = getQuantite();
     const devise = deviseSelect.value;
     const total = totalInput.value || '(à calculer)';
-    
-    // --- LOGIQUE DE VALIDATION ---
 
+    // VALIDATION
     if (!region) {
       msgInfo.textContent = 'Merci de sélectionner une région.';
       msgInfo.style.color = 'red';
@@ -1034,12 +1032,12 @@
         }
       }
     }
-    
+
     const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
     let email = '';
     let numero = '';
     let indicatifClient = '';
-    
+
     if (modeEnvoi === 'email') {
       email = emailClientInput.value.trim();
       if (!email) {
@@ -1063,7 +1061,10 @@
       indicatifClient = indicatifSpan.textContent || '+';
     }
 
-    const ligneZone = (zone ? `Zone CI : ${zone}${villeInterieur ? ' / Ville : ' + villeInterieur : ''}\n` : '');
+    const ligneZone = (zone
+      ? `Zone CI : ${zone}${villeInterieur ? ' / Ville : ' + villeInterieur : ''}\n`
+      : '');
+
     const resume =
       `Nouvelle commande Éditions Nubi\n\n` +
       `Région : ${region}\n` +
@@ -1075,11 +1076,15 @@
       `Devise : ${devise}\n` +
       `Total estimé HT : ${total}\n`;
 
-    // Si Afrique mais pas Côte d'Ivoire → e-mail obligatoire
+    // Cas Afrique hors CI → email obligatoire
     if (region === 'afrique' && pays !== "Côte d'Ivoire") {
       const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(resume + '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.');
-      window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
+      const body = encodeURIComponent(
+        resume +
+        '\nMerci de préciser vos coordonnées :\nNom, prénom, adresse, téléphone.'
+      );
+      window.location.href =
+        `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
       msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
       msgInfo.style.color = '#333';
       montrerConfirmation('email');
@@ -1088,13 +1093,20 @@
 
     if (modeEnvoi === 'email') {
       const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(resume + `\nE-mail du client : ${email}\n\nMerci de préciser vos coordonnées postales pour l’expédition.`);
-      window.location.href = `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
+      const body = encodeURIComponent(
+        resume +
+        `\nE-mail du client : ${email}\n\nMerci de préciser vos coordonnées postales pour l’expédition.`
+      );
+      window.location.href =
+        `mailto:contact@editionsnubi.com?subject=${subject}&body=${body}`;
       msgInfo.textContent = 'Redirection vers votre application e-mail pour finaliser la commande.';
       msgInfo.style.color = '#333';
       montrerConfirmation('email');
-    } else { // whatsapp
-      const texte = encodeURIComponent(resume + `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`);
+    } else {
+      const texte = encodeURIComponent(
+        resume +
+        `\nNuméro WhatsApp du client : ${indicatifClient}${numero}`
+      );
       const telDestination = '2250709850776';
       window.open(`https://wa.me/${telDestination}?text=${texte}`, '_blank');
       msgInfo.textContent = 'Une fenêtre WhatsApp va s’ouvrir pour envoyer votre commande.';
@@ -1102,13 +1114,14 @@
       montrerConfirmation('whatsapp');
     }
   });
-  
-  // Initialiser quantités et total
+
+  // Initialiser quantités et total au chargement
   majQuantites();
   calculerTotal();
 </script>
 
 </body>
 </html>
+
 
 
