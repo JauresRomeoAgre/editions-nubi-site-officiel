@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Éditions Nubi – Le Petit Nuage Qui Avait Peur de Pleuvoir</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Éditions Nubi, maison d’édition jeunesse indépendante. Découvrez l’album illustré Le Petit Nuage Qui Avait Peur de Pleuvoir, une histoire sur la confiance en soi et les émotions.">
+  <meta name="description" content="Éditions Nubi, maison d’édition jeunesse indépendante.">
   <style>
     :root {
       --bleu-ciel: #8ec5fc;
@@ -21,6 +21,7 @@
       color: var(--texte);
       line-height: 1.6;
     }
+    /* --- STYLES HEADER & NAV --- */
     header {
       background: linear-gradient(135deg, var(--bleu-ciel), var(--rose-doux));
       color: #fff;
@@ -70,10 +71,9 @@
       font-size: 0.95rem;
       opacity: 0.9;
     }
-    nav a:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
+    nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* --- HERO --- */
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
@@ -105,7 +105,7 @@
       cursor: pointer;
       font-size: 0.95rem;
       text-decoration: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       margin-right: 0.5rem;
     }
     .btn-primary {
@@ -114,18 +114,13 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.18);
       font-weight: 600;
     }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
-    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(0,0,0,0.22); }
     .btn-ghost {
       background: rgba(255,255,255,0.18);
       color: #fff;
       border: 1px solid rgba(255,255,255,0.5);
     }
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.3);
-    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.3); }
     .btn-order {
       background: #2563eb;
       color: #fff;
@@ -133,10 +128,7 @@
       box-shadow: 0 8px 20px rgba(37,99,235,0.35);
       margin-top: 0.8rem;
     }
-    .btn-order:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 26px rgba(37,99,235,0.45);
-    }
+    .btn-order:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(37,99,235,0.45); }
 
     .hero-book {
       background: rgba(255,255,255,0.95);
@@ -154,48 +146,23 @@
       font-weight: 600;
       margin-bottom: 0.6rem;
     }
-    .hero-book-title {
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-    }
-    .hero-book-sub {
-      font-size: 0.9rem;
-      margin-bottom: 0.8rem;
-      color: #555;
-    }
+    .hero-book-title { font-weight: 700; margin-bottom: 0.2rem; }
+    .hero-book-sub { font-size: 0.9rem; margin-bottom: 0.8rem; color: #555; }
     .hero-cover {
       margin-top: 0.8rem;
       border-radius: 1rem;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(15,23,42,0.25);
     }
-    .hero-cover img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+    .hero-cover img { display: block; width: 100%; height: auto; }
 
-    section {
-      padding: 3rem 1.5rem;
-    }
-    section:nth-of-type(odd) {
-      background: #ffffff;
-    }
-    section:nth-of-type(even) {
-      background: var(--fond);
-    }
-    section h2 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    section p.lead {
-      text-align: center;
-      max-width: 620px;
-      margin: 0 auto 2rem;
-      color: #555;
-      font-size: 0.98rem;
-    }
+    /* --- SECTIONS --- */
+    section { padding: 3rem 1.5rem; }
+    section:nth-of-type(odd) { background: #ffffff; }
+    section:nth-of-type(even) { background: var(--fond); }
+    section h2 { font-size: 1.6rem; margin-bottom: 1rem; text-align: center; }
+    section p.lead { text-align: center; max-width: 620px; margin: 0 auto 2rem; color: #555; font-size: 0.98rem; }
+    
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -208,100 +175,42 @@
       padding: 1.4rem;
       box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
-    .card h3 {
-      font-size: 1.05rem;
-      margin-bottom: 0.6rem;
-    }
-    .meta-list {
-      list-style: none;
-      font-size: 0.95rem;
-    }
-    .meta-list li {
-      margin-bottom: 0.25rem;
-    }
+    .card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+    .meta-list { list-style: none; font-size: 0.95rem; }
+    .meta-list li { margin-bottom: 0.25rem; }
     .pill-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
+      list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem;
     }
     .pill-list li {
-      background: #eef4ff;
-      color: #25315a;
-      border-radius: 999px;
-      padding: 0.25rem 0.7rem;
-      font-size: 0.8rem;
+      background: #eef4ff; color: #25315a; border-radius: 999px; padding: 0.25rem 0.7rem; font-size: 0.8rem;
     }
     .highlight {
-      background: #fff7e6;
-      border-left: 4px solid #f6a723;
-      padding: 1rem 1.1rem;
-      border-radius: 0.8rem;
-      font-size: 0.95rem;
+      background: #fff7e6; border-left: 4px solid #f6a723; padding: 1rem 1.1rem; border-radius: 0.8rem; font-size: 0.95rem;
     }
     .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 1.8rem;
-      align-items: flex-start;
-      margin-top: 1.5rem;
+      display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.8rem; align-items: flex-start; margin-top: 1.5rem;
     }
     .contact-block {
-      max-width: 480px;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 0.98rem;
+      max-width: 480px; margin: 0 auto; text-align: center; font-size: 0.98rem;
     }
-    .contact-block a {
-      color: var(--bleu-nuit);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .contact-block a:hover {
-      text-decoration: underline;
-    }
+    .contact-block a { color: var(--bleu-nuit); text-decoration: none; font-weight: 600; }
+    .contact-block a:hover { text-decoration: underline; }
     footer {
-      text-align: center;
-      padding: 1.5rem 1rem 2rem;
-      font-size: 0.85rem;
-      color: #777;
-      background: #ffffff;
+      text-align: center; padding: 1.5rem 1rem 2rem; font-size: 0.85rem; color: #777; background: #ffffff;
     }
 
+    /* --- FORMULAIRE --- */
+    form.card label { display:block; margin-top:0.8rem; margin-bottom:0.2rem; font-size:0.9rem; }
+    form.card select, form.card input {
+      width:100%; padding:0.4rem 0.6rem; border-radius:0.4rem; border:1px solid #d0d4e4; font-size:0.9rem;
+    }
+    
     @media (max-width: 780px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      nav {
-        justify-content: center;
-      }
-      nav .logo {
-        width: 100%;
-        text-align: center;
-      }
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-      header {
-        padding-bottom: 3rem;
-      }
-    }
-
-    /* Petits styles pour le formulaire */
-    form.card label {
-      display:block;
-      margin-top:0.8rem;
-      margin-bottom:0.2rem;
-      font-size:0.9rem;
-    }
-    form.card select,
-    form.card input {
-      width:100%;
-      padding:0.4rem 0.6rem;
-      border-radius:0.4rem;
-      border:1px solid #d0d4e4;
-      font-size:0.9rem;
+      .hero { grid-template-columns: 1fr; }
+      nav { justify-content: center; }
+      nav .logo { width: 100%; text-align: center; }
+      .two-col { grid-template-columns: 1fr; }
+      header { padding-bottom: 3rem; }
     }
   </style>
 </head>
@@ -315,7 +224,7 @@
         <li><a href="#livre">Le livre</a></li>
         <li><a href="#editeur">La maison d’édition</a></li>
         <li><a href="#auteur">L’auteur</a></li>
-        <li><a href="#pro">Librairies & bibliothèques</a></li>
+        <li><a href="#pro">Librairies</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -327,28 +236,20 @@
         <p>
           Éditions Nubi publie des albums jeunesse lumineux, sensibles et rassurants.
           Notre premier titre, <strong>Le Petit Nuage Qui Avait Peur de Pleuvoir</strong>,
-          accompagne les enfants dans la découverte de leur sensibilité et de leur courage.
+          accompagne les enfants dans la découverte de leur sensibilité.
         </p>
         <a href="#livre" class="btn-primary">Découvrir l’album</a>
-        <a href="#pro" class="btn-ghost">Infos librairies & bibliothèques</a>
+        <a href="#pro" class="btn-ghost">Infos librairies</a>
       </div>
 
       <div class="hero-book">
         <span class="badge">Nouveauté</span>
         <div class="hero-book-title">Le Petit Nuage Qui Avait Peur de Pleuvoir</div>
         <div class="hero-book-sub">Album jeunesse 21×27 cm – 40 pages couleur</div>
-        <p style="font-size:0.9rem;">
-          Nubi est un petit nuage très sensible, qui a peur de pleuvoir et de faire du mal aux autres.
-          Jusqu’au jour où il découvre que ses gouttes peuvent aussi faire beaucoup de bien…
-        </p>
-
         <div class="hero-cover">
-          <img src="ImageNubi.png" alt="Couverture du livre Le Petit Nuage Qui Avait Peur de Pleuvoir" />
+          <img src="ImageNubi.png" alt="Couverture du livre" />
         </div>
-
-        <a href="#commande" class="btn-order">
-          Commander
-        </a>
+        <a href="#commande" class="btn-order">Commander</a>
       </div>
     </div>
   </div>
@@ -357,171 +258,20 @@
 <section id="livre">
   <div class="wrapper">
     <h2>Le Petit Nuage Qui Avait Peur de Pleuvoir</h2>
-    <p class="lead">
-      Un album tendre et poétique pour aider les enfants à apprivoiser leurs émotions,
-      leur timidité et leur grande sensibilité.
-    </p>
-
+    <p class="lead">Un album tendre et poétique pour aider les enfants à apprivoiser leurs émotions.</p>
     <div class="grid">
       <div class="card">
         <h3>L’histoire</h3>
-        <p>
-          Nubi est le plus petit nuage du ciel. Timide et très sensible, il a peur de pleuvoir
-          trop fort et de faire du mal. Alors, chaque fois qu’il sent une goutte au bout de son ventre blanc,
-          il se cache derrière une montagne.
-        </p>
-        <p>
-          Un jour pourtant, trois petites fleurs du pré ont désespérément soif.
-          Nubi devra choisir : rester caché avec sa peur, ou oser pleuvoir pour les aider.
-        </p>
+        <p>Nubi est le plus petit nuage du ciel. Timide et très sensible, il a peur de pleuvoir trop fort...</p>
       </div>
-
       <div class="card">
         <h3>Caractéristiques</h3>
         <ul class="meta-list">
-          <li><strong>Genre :</strong> Album jeunesse illustré</li>
           <li><strong>Âge :</strong> Dès 3 ans</li>
           <li><strong>Format :</strong> 21 × 27 cm</li>
-          <li><strong>Pagination :</strong> 40 pages couleur</li>
-          <li><strong>Couverture :</strong> Cartonnée premium</li>
           <li><strong>Prix public :</strong> 14,49 € HT</li>
-          <li><strong>Éditeur :</strong> Éditions Nubi</li>
-          <li><strong>ISBN :</strong> à compléter</li>
         </ul>
-        <a href="#commande" class="btn-order">
-          Commander
-        </a>
-      </div>
-
-      <div class="card">
-        <h3>Thèmes abordés</h3>
-        <p>Un livre idéal pour parler d’émotions en famille ou en classe :</p>
-        <ul class="pill-list">
-          <li>Confiance en soi</li>
-          <li>Gestion de la timidité</li>
-          <li>Hypersensibilité</li>
-          <li>Entraide & empathie</li>
-          <li>Courage d’être soi-même</li>
-          <li>Beauté du don</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="editeur">
-  <div class="wrapper">
-    <h2>Éditions Nubi</h2>
-    <p class="lead">
-      Une maison d’édition jeunesse indépendante, dédiée aux histoires qui apaisent,
-      rassurent et font grandir les enfants.
-    </p>
-
-    <div class="two-col">
-      <div>
-        <h3>Notre vision</h3>
-        <p>
-          Éditions Nubi est née d’une envie simple : offrir aux enfants des histoires
-          qui parlent à leur cœur autant qu’à leur imagination. Nos albums abordent
-          les émotions, la sensibilité, la peur, la confiance, avec douceur et bienveillance.
-        </p>
-        <p>
-          Nous croyons que les livres peuvent devenir de vrais compagnons de route,
-          aider à mettre des mots sur ce que les enfants ressentent et ouvrir le dialogue
-          avec les adultes qui les entourent.
-        </p>
-      </div>
-      <div>
-        <div class="highlight">
-          <strong>Nos engagements :</strong><br><br>
-          • Des illustrations de haute qualité, douces et expressives<br>
-          • Des textes accessibles, pensés pour être lus à voix haute<br>
-          • Des thématiques fortes : émotions, estime de soi, lien aux autres<br>
-          • Un soin particulier porté à la fabrication de chaque album
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="auteur">
-  <div class="wrapper">
-    <h2>L’auteur</h2>
-    <p class="lead">
-      À l’origine de Nubi, un auteur passionné par la sensibilité et le monde intérieur des enfants.
-    </p>
-
-    <div class="two-col">
-      <div>
-        <h3>Jaurès Roméo Agré</h3>
-        <p>
-          Auteur et créateur d’univers jeunesse, Jaurès Roméo Agré imagine des histoires
-          qui parlent de peur, de courage, de timidité et de lumière intérieure.
-          Il souhaite offrir aux enfants des récits qui les aident à se reconnaître,
-          se sentir moins seuls et à voir leur sensibilité comme une force.
-        </p>
-        <p>
-          Avec <em>Le Petit Nuage Qui Avait Peur de Pleuvoir</em>, il signe un premier album
-          tendre et symbolique, pensé autant pour les enfants que pour les adultes qui lisent avec eux.
-        </p>
-      </div>
-      <div>
-        <p>
-          <strong>Un univers visuel fort</strong><br>
-          L’album s’appuie sur un style graphique inspiré des univers animés, avec des couleurs
-          chaleureuses, des personnages expressifs, et un soin particulier porté à l’atmosphère
-          de chaque scène.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pro">
-  <div class="wrapper">
-    <h2>Librairies & bibliothèques</h2>
-    <p class="lead">
-      Vous souhaitez proposer <em>Le Petit Nuage Qui Avait Peur de Pleuvoir</em> à vos lecteurs ?
-      Nous travaillons avec les libraires, bibliothèques et écoles.
-    </p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Pour les libraires</h3>
-        <p>
-          L’album est disponible en dépôt-vente ou en achat ferme.
-        </p>
-        <ul class="meta-list">
-          <li>• Remise libraire : 35 % (dépôt-vente)</li>
-          <li>• Reprise des invendus</li>
-          <li>• Livraison directe</li>
-          <li>• Affiche & visuels fournis</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Pour les bibliothèques & écoles</h3>
-        <p>
-          Un support idéal pour les heures du conte, animations jeunesse
-          et discussions autour des émotions.
-        </p>
-        <ul class="meta-list">
-          <li>• Thématiques : émotions, confiance, sensibilité</li>
-          <li>• Grand format pour lectures à voix haute</li>
-          <li>• Possible rencontre/animation avec l’auteur (selon disponibilité)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Dossier & matériel pro</h3>
-        <p>
-          Sur demande, nous mettons à disposition :
-        </p>
-        <ul class="meta-list">
-          <li>• Dossier commercial (PDF)</li>
-          <li>• Feuilletage vidéo de l’album</li>
-          <li>• Visuels HD (couverture, pages intérieures)</li>
-        </ul>
+        <a href="#commande" class="btn-order">Commander</a>
       </div>
     </div>
   </div>
@@ -530,15 +280,11 @@
 <section id="commande">
   <div class="wrapper">
     <h2>Commander un livre</h2>
-    <p class="lead">
-      Remplissez ce formulaire pour passer votre commande. Vous recevrez un récapitulatif par e-mail
-      ou via WhatsApp selon votre choix.
-    </p>
+    <p class="lead">Remplissez ce formulaire pour recevoir votre bon de commande.</p>
 
     <form id="commandeForm" class="card" style="max-width: 700px; margin: 0 auto;">
-      <!-- Région -->
       <label for="region"><strong>Région</strong></label>
-      <select id="region" name="region" required>
+      <select id="region" name="region">
         <option value="">Choisissez une région</option>
         <option value="afrique">Afrique</option>
         <option value="europe">Europe</option>
@@ -546,13 +292,11 @@
         <option value="asie">Asie</option>
       </select>
 
-      <!-- Pays -->
       <label for="pays"><strong>Pays</strong></label>
-      <select id="pays" name="pays" required>
+      <select id="pays" name="pays">
         <option value="">Choisissez d’abord une région</option>
       </select>
 
-      <!-- Zones Côte d’Ivoire -->
       <div id="zone-ci-block" style="display:none;">
         <label for="zoneCI"><strong>Zone (Côte d’Ivoire)</strong></label>
         <select id="zoneCI" name="zoneCI">
@@ -562,79 +306,60 @@
           <option value="Dabou">Dabou</option>
           <option value="Interieur">Intérieur</option>
         </select>
-
         <div id="ville-interieur-block" style="margin-top:0.5rem; display:none;">
           <label for="villeInterieur"><strong>Ville (intérieur)</strong></label>
           <input type="text" id="villeInterieur" name="villeInterieur" placeholder="Nom de la ville" />
         </div>
       </div>
 
-      <!-- Statut -->
       <label for="statut"><strong>Vous êtes…</strong></label>
-      <select id="statut" name="statut" required>
+      <select id="statut" name="statut">
         <option value="">Choisissez un statut</option>
         <option value="parent">Parent</option>
         <option value="librairie">Librairie</option>
         <option value="ecole">École</option>
         <option value="bibliotheque">Bibliothèque</option>
-        <option value="psychologue">Psychologue pour enfants</option>
         <option value="autre">Autre</option>
       </select>
 
-      <!-- Livre -->
       <label for="livre"><strong>Livre souhaité</strong></label>
-      <select id="livre" name="livre" required>
-        <option value="">Choisissez un livre</option>
-        <option value="Le Petit Nuage Qui Avait Peur de Pleuvoir">
-          Le Petit Nuage Qui Avait Peur de Pleuvoir
-        </option>
+      <select id="livre" name="livre">
+        <option value="Le Petit Nuage Qui Avait Peur de Pleuvoir">Le Petit Nuage Qui Avait Peur de Pleuvoir</option>
       </select>
 
-      <!-- Quantité -->
       <div id="quantite-block">
         <label for="quantite"><strong>Quantité</strong></label>
-        <select id="quantite" name="quantite">
-          <!-- Options remplies dynamiquement selon le statut -->
-        </select>
-
+        <select id="quantite" name="quantite"></select>
         <div id="quantite-pers-block" style="margin-top:0.5rem; display:none;">
           <label for="quantitePerso"><strong>Quantité personnalisée</strong></label>
           <input type="number" id="quantitePerso" min="1" step="1" />
         </div>
       </div>
 
-      <!-- Devise & prix -->
       <div style="margin-top:1rem;">
-        <select id="devise" name="devise" required>
+        <select id="devise" name="devise">
           <option value="">Choisissez une devise</option>
           <option value="EUR">Euro (€)</option>
           <option value="USD">Dollar ($)</option>
           <option value="XOF">Franc CFA (FCFA)</option>
         </select>
       </div>
-
       <div style="margin-top:0.5rem;">
         <label for="total"><strong>Total HT</strong></label>
         <input type="text" id="total" readonly />
-        <small style="display:block; font-size:0.8rem; color:#666;">
-          Prix unitaire HT : 14,49 € • 16,99 $ • 10 000 FCFA
-        </small>
       </div>
 
-      <!-- Mode d’envoi -->
       <div style="margin-top:1.2rem;">
         <strong>Envoyer la commande via :</strong><br>
         <label><input type="radio" name="envoi" value="email" checked> E-mail</label>
         <label style="margin-left:1rem;"><input type="radio" name="envoi" value="whatsapp"> WhatsApp</label>
       </div>
 
-      <!-- Email -->
       <div id="email-block" style="margin-top:0.8rem;">
         <label for="emailClient"><strong>Votre e-mail</strong></label>
         <input type="email" id="emailClient" placeholder="votre.email@example.com" />
       </div>
 
-      <!-- WhatsApp -->
       <div id="whatsapp-block" style="margin-top:0.8rem; display:none;">
         <label for="whatsappClient"><strong>Votre numéro WhatsApp</strong></label>
         <div style="display:flex; gap:0.5rem; align-items:center;">
@@ -643,7 +368,6 @@
         </div>
       </div>
 
-      <!-- Bouton envoyer -->
       <button type="button" id="btnEnvoyer" class="btn-order" style="margin-top:1.5rem;">
         Envoyer la commande
       </button>
@@ -651,15 +375,10 @@
       <p id="msgInfo" style="margin-top:0.8rem; font-size:0.85rem; color:#555;"></p>
     </form>
 
-    <!-- Carte de confirmation (affichée après envoi) -->
     <div id="confirmationCard" class="card" style="max-width:700px; margin:1.5rem auto 0; text-align:center; display:none;">
       <h3>Merci pour votre commande !</h3>
-      <p id="confirmationTexte" style="margin-top:0.8rem; font-size:0.95rem;">
-        Votre commande a bien été préparée. Vous pouvez finaliser l’envoi dans votre application.
-      </p>
-      <a href="#top" class="btn-primary" style="margin-top:1rem; display:inline-block;">
-        Retour à l’accueil
-      </a>
+      <p id="confirmationTexte" style="margin-top:0.8rem; font-size:0.95rem;"></p>
+      <a href="#top" class="btn-primary" style="margin-top:1rem; display:inline-block;">Retour à l’accueil</a>
     </div>
   </div>
 </section>
@@ -667,23 +386,10 @@
 <section id="contact">
   <div class="wrapper">
     <h2>Contact</h2>
-    <p class="lead">
-      Une question, une commande, un projet de partenariat ?
-      N’hésitez pas à nous écrire.
-    </p>
-
     <div class="contact-block">
-      <p><strong>Éditions Nubi</strong><br>
-        Responsable éditorial : Jaurès Roméo Agré
-      </p>
-      <p>
-        📧 Email : <a href="mailto:contact@editionsnubi.com">contact@editionsnubi.com</a><br>
-        📞 Téléphone : <a href="tel:+2250709850776">+225 0709850776</a>
-      </p>
-      <p>
-        Vous pouvez également nous suivre sur les réseaux sociaux
-        (liens à ajouter) pour découvrir les coulisses de la création et des prochaines parutions.
-      </p>
+      <p><strong>Éditions Nubi</strong></p>
+      <p>📧 <a href="mailto:contact@editionsnubi.com">contact@editionsnubi.com</a></p>
+      <p>📞 <a href="tel:+2250709850776">+225 0709850776</a></p>
     </div>
   </div>
 </section>
@@ -693,12 +399,12 @@
 </footer>
 
 <script>
-  // --- 1. DONNÉES ET CONFIGURATION ---
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // --- CONFIGURATION ---
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Tes coordonnées pour la réception des commandes
   const EMAIL_DESTINATION = "contact@editionsnubi.com";
-  const WHATSAPP_DESTINATION = "2250709850776"; // Format: 22507XXXXXXXX (pas de +)
+  const WHATSAPP_DESTINATION = "2250709850776";
 
   const paysParRegion = {
     afrique: ["Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Guinée", "Cameroun", "Congo", "RDC", "Maroc", "Algérie", "Tunisie"],
@@ -719,7 +425,7 @@
     "Canada": 10, "États-Unis": 10, "Brésil": 11, "Mexique": 10, "Chine": 11, "Japon": 10, "Inde": 10, "Corée du Sud": 10, "Émirats Arabes Unis": 9
   };
 
-  // --- 2. SÉLECTION DES ÉLÉMENTS DOM ---
+  // --- ÉLÉMENTS DOM ---
   const regionSelect = document.getElementById('region');
   const paysSelect = document.getElementById('pays');
   const zoneCIBlock = document.getElementById('zone-ci-block');
@@ -743,53 +449,44 @@
   const confirmationCard = document.getElementById('confirmationCard');
   const confirmationTexte = document.getElementById('confirmationTexte');
 
-  // --- 3. LOGIQUE DYNAMIQUE ---
+  // --- LOGIQUE ---
 
-  // Remplir pays selon région
+  // Pays selon Région
   regionSelect.addEventListener('change', () => {
     const region = regionSelect.value;
     paysSelect.innerHTML = '<option value="">Choisissez un pays</option>';
     zoneCIBlock.style.display = 'none';
     villeInterieurBlock.style.display = 'none';
-
     if (paysParRegion[region]) {
       paysParRegion[region].forEach(p => {
         const opt = document.createElement('option');
-        opt.value = p;
-        opt.textContent = p;
+        opt.value = p; opt.textContent = p;
         paysSelect.appendChild(opt);
       });
     }
   });
 
-  // Gestion Côte d’Ivoire + indicatif + longueur téléphone
+  // Gestion Côte d'Ivoire
   paysSelect.addEventListener('change', () => {
     const pays = paysSelect.value;
-
-    // Zones CI
     if (regionSelect.value === 'afrique' && pays === "Côte d'Ivoire") {
       zoneCIBlock.style.display = 'block';
     } else {
       zoneCIBlock.style.display = 'none';
       villeInterieurBlock.style.display = 'none';
     }
-
-    // Indicatif WhatsApp
     indicatifSpan.textContent = indicatifParPays[pays] || "+";
-
-    // Longueur et placeholder du numéro
     const longueur = longueurTelParPays[pays] || 10;
     whatsappClientInput.value = "";
     whatsappClientInput.setAttribute('maxlength', longueur);
     whatsappClientInput.placeholder = `Numéro (${longueur} chiffres)`;
   });
 
-  // Zone Intérieur → ville à saisir
   zoneCISelect.addEventListener('change', () => {
     villeInterieurBlock.style.display = (zoneCISelect.value === 'Interieur') ? 'block' : 'none';
   });
 
-  // Options de quantités selon statut
+  // Quantités
   function majQuantites() {
     const statut = statutSelect.value;
     quantiteSelect.innerHTML = '';
@@ -803,14 +500,10 @@
       options = ['0','1','2','3','5','7','10','personnaliser'];
     } else {
       const opt = document.createElement('option');
-      opt.value = '';
-      opt.textContent = "Choisissez d’abord un statut";
-      opt.disabled = true;
-      opt.selected = true;
+      opt.value = ''; opt.textContent = "Choisissez d’abord un statut"; opt.disabled = true; opt.selected = true;
       quantiteSelect.appendChild(opt);
       return;
     }
-
     options.forEach(val => {
       const opt = document.createElement('option');
       opt.value = val;
@@ -818,7 +511,6 @@
       quantiteSelect.appendChild(opt);
     });
   }
-
   statutSelect.addEventListener('change', majQuantites);
 
   quantiteSelect.addEventListener('change', () => {
@@ -845,154 +537,119 @@
     if (deviseSelect.value === 'EUR') unit = 14.49;
     if (deviseSelect.value === 'USD') unit = 16.99;
     if (deviseSelect.value === 'XOF') unit = 10000;
-
-    if (!qte || !unit) {
-      totalInput.value = '';
-      return;
-    }
-
+    
+    if (!qte || !unit) { totalInput.value = ''; return; }
+    
     const total = qte * unit;
-    if (deviseSelect.value === 'XOF') {
-      totalInput.value = total.toLocaleString('fr-FR') + ' FCFA';
-    } else if (deviseSelect.value === 'EUR') {
-      totalInput.value = total.toFixed(2).replace('.', ',') + ' €';
-    } else {
-      totalInput.value = total.toFixed(2) + ' $';
-    }
+    if (deviseSelect.value === 'XOF') totalInput.value = total.toLocaleString('fr-FR') + ' FCFA';
+    else if (deviseSelect.value === 'EUR') totalInput.value = total.toFixed(2).replace('.', ',') + ' €';
+    else totalInput.value = total.toFixed(2) + ' $';
   }
 
-  // Choix e-mail vs WhatsApp
+  // Toggle Email/WhatsApp
   document.querySelectorAll('input[name="envoi"]').forEach(radio => {
     radio.addEventListener('change', () => {
       if (radio.value === 'email' && radio.checked) {
-        emailBlock.style.display = 'block';
-        whatsappBlock.style.display = 'none';
+        emailBlock.style.display = 'block'; whatsappBlock.style.display = 'none';
       }
       if (radio.value === 'whatsapp' && radio.checked) {
-        emailBlock.style.display = 'none';
-        whatsappBlock.style.display = 'block';
+        emailBlock.style.display = 'none'; whatsappBlock.style.display = 'block';
       }
     });
   });
 
-  // Afficher la "page" de confirmation
-  function montrerConfirmation(mode) {
-    commandeForm.style.display = 'none';
-    confirmationCard.style.display = 'block';
-
-    if (mode === 'email') {
-      confirmationTexte.textContent = "Votre commande a été générée dans votre application e-mail. Vérifiez le message et envoyez-le.";
-    } else if (mode === 'whatsapp') {
-      confirmationTexte.textContent = "WhatsApp s'est ouvert. Vérifiez le message et envoyez-le pour valider la commande.";
-    }
-    location.hash = '#commande';
-  }
-
-  // --- 4. TRAITEMENT DE L'ENVOI (C'est ici que la magie opère) ---
+  // --- ENVOI ---
   btnEnvoyer.addEventListener('click', () => {
-    msgInfo.textContent = ''; // reset
-
-    // Récupération des valeurs
-    const region = regionSelect.value;
-    const pays = paysSelect.value;
-    const statut = statutSelect.value;
-    const livreTexte = livreSelect.options[livreSelect.selectedIndex] ? livreSelect.options[livreSelect.selectedIndex].text : '';
-    const qte = getQuantite();
-    const devise = deviseSelect.value;
-    const total = totalInput.value || '(à calculer)';
-    const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
-
-    // VALIDATION
-    if (!region) return afficherErreur('Merci de sélectionner une région.');
-    if (!pays) return afficherErreur('Merci de sélectionner un pays.');
-    if (!statut) return afficherErreur('Merci de sélectionner un statut.');
-    if (!qte || qte <= 0) return afficherErreur('Merci d’indiquer une quantité de livres (au moins 1).');
-
-    // Gestion Côte d’Ivoire
-    let detailsZone = '';
-    if (region === 'afrique' && pays === "Côte d'Ivoire") {
-      const zone = zoneCISelect.value;
-      if (!zone) return afficherErreur('Veuillez choisir une zone pour la Côte d’Ivoire.');
+    try {
+      msgInfo.textContent = '';
       
-      let ville = '';
-      if (zone === 'Interieur') {
-        ville = document.getElementById('villeInterieur').value.trim();
-        if (!ville) return afficherErreur('Veuillez renseigner le nom de la ville.');
-        detailsZone = `Zone CI : Intérieur / Ville : ${ville}\n`;
-      } else {
-        detailsZone = `Zone CI : ${zone}\n`;
+      const region = regionSelect.value;
+      const pays = paysSelect.value;
+      const statut = statutSelect.value;
+      const qte = getQuantite();
+      const devise = deviseSelect.value;
+      const total = totalInput.value || '(à calculer)';
+      const modeEnvoi = document.querySelector('input[name="envoi"]:checked').value;
+      const livreTexte = livreSelect.options[livreSelect.selectedIndex].text;
+
+      // Validation
+      if (!region) throw "Merci de sélectionner une région.";
+      if (!pays) throw "Merci de sélectionner un pays.";
+      if (!statut) throw "Merci de sélectionner un statut.";
+      if (!qte || qte <= 0) throw "Merci d’indiquer une quantité de livres.";
+
+      let detailsZone = '';
+      if (region === 'afrique' && pays === "Côte d'Ivoire") {
+        const zone = zoneCISelect.value;
+        if (!zone) throw "Veuillez choisir une zone pour la Côte d’Ivoire.";
+        if (zone === 'Interieur') {
+           const ville = document.getElementById('villeInterieur').value.trim();
+           if (!ville) throw "Veuillez renseigner le nom de la ville.";
+           detailsZone = `Zone CI : Intérieur / Ville : ${ville}\n`;
+        } else {
+           detailsZone = `Zone CI : ${zone}\n`;
+        }
       }
-    }
 
-    // Récupération Email ou WhatsApp selon le choix
-    let emailClient = '';
-    let numeroWhatsApp = '';
-    let numeroComplet = '';
-
-    if (modeEnvoi === 'email') {
-      emailClient = emailClientInput.value.trim();
-      if (!emailClient) return afficherErreur('Merci de renseigner votre adresse e-mail.');
-    } else {
-      // Mode WhatsApp
-      const numSaisi = whatsappClientInput.value.trim();
-      if (!numSaisi) return afficherErreur('Merci de renseigner votre numéro WhatsApp.');
+      let emailClient = '';
+      let numeroComplet = '';
       
-      const longueurAttendue = longueurTelParPays[pays] || 10;
-      if (numSaisi.length !== longueurAttendue) return afficherErreur(`Le numéro pour ${pays} doit comporter ${longueurAttendue} chiffres.`);
-      
-      numeroWhatsApp = numSaisi;
-      numeroComplet = (indicatifSpan.textContent || '+') + numSaisi;
-    }
+      if (modeEnvoi === 'email') {
+        emailClient = emailClientInput.value.trim();
+        if (!emailClient) throw "Merci de renseigner votre adresse e-mail.";
+      } else {
+        const numSaisi = whatsappClientInput.value.trim();
+        if (!numSaisi) throw "Merci de renseigner votre numéro WhatsApp.";
+        const longueurAttendue = longueurTelParPays[pays] || 10;
+        if (numSaisi.length !== longueurAttendue) throw `Le numéro pour ${pays} doit comporter ${longueurAttendue} chiffres.`;
+        numeroComplet = (indicatifSpan.textContent || '+') + numSaisi;
+      }
 
-    // Construction du message
-    const resume =
-      `*Nouvelle commande Éditions Nubi*\n\n` +
-      `📍 Pays : ${pays}\n` +
-      detailsZone +
-      `👤 Statut : ${statut}\n` +
-      `📖 Livre : ${livreTexte}\n` +
-      `📦 Quantité : ${qte}\n` +
-      `💰 Total estimé : ${total}\n` +
-      `--------------------------------\n`;
+      // Construction message
+      const resume = 
+        `*Nouvelle commande Éditions Nubi*\n` +
+        `--------------------------------\n` +
+        `📍 Pays : ${pays}\n` +
+        detailsZone +
+        `👤 Statut : ${statut}\n` +
+        `📖 Livre : ${livreTexte}\n` +
+        `📦 Quantité : ${qte}\n` +
+        `💰 Total : ${total}\n` +
+        `--------------------------------\n`;
 
-    // --- REDIRECTION ---
+      if (modeEnvoi === 'email') {
+         const subject = encodeURIComponent('Commande livre – Éditions Nubi');
+         const body = encodeURIComponent(resume + `E-mail client : ${emailClient}\n\nMerci de compléter vos coordonnées :\nNom :\nAdresse :\nTéléphone :`);
+         window.location.href = `mailto:${EMAIL_DESTINATION}?subject=${subject}&body=${body}`;
+         
+         commandeForm.style.display = 'none';
+         confirmationCard.style.display = 'block';
+         confirmationTexte.textContent = "Votre application E-mail va s'ouvrir. Vérifiez et envoyez le message.";
+         location.hash = '#commande';
 
-    if (modeEnvoi === 'email') {
-      // Envoi par E-mail
-      const subject = encodeURIComponent('Commande livre – Éditions Nubi');
-      const body = encodeURIComponent(
-        resume +
-        `E-mail client : ${emailClient}\n\n` +
-        `Merci de compléter vos coordonnées ci-dessous :\n` +
-        `Nom & Prénom :\nAdresse de livraison :\nNuméro de téléphone :\n`
-      );
-      window.location.href = `mailto:${EMAIL_DESTINATION}?subject=${subject}&body=${body}`;
-      montrerConfirmation('email');
+      } else {
+         const texteWhatsApp = encodeURIComponent(resume + `📞 Contact : ${numeroComplet}\n\nBonjour, je souhaite valider cette commande.\nMon Nom & Prénom : `);
+         window.open(`https://wa.me/${WHATSAPP_DESTINATION}?text=${texteWhatsApp}`, '_blank');
+         
+         commandeForm.style.display = 'none';
+         confirmationCard.style.display = 'block';
+         confirmationTexte.textContent = "WhatsApp s'est ouvert dans un nouvel onglet. Envoyez le message pour commander.";
+         location.hash = '#commande';
+      }
 
-    } else {
-      // Envoi par WhatsApp
-      const texteWhatsApp = encodeURIComponent(
-        resume +
-        `📞 Contact WhatsApp : ${numeroComplet}\n\n` +
-        `Bonjour, je souhaite commander ce livre. Voici mes infos :\n` +
-        `Nom & Prénom : `
-      );
-      // Utilisation de wa.me qui fonctionne mobile et desktop
-      window.open(`https://wa.me/${WHATSAPP_DESTINATION}?text=${texteWhatsApp}`, '_blank');
-      montrerConfirmation('whatsapp');
+    } catch (erreur) {
+      // Affichage de l'erreur
+      msgInfo.textContent = typeof erreur === 'string' ? erreur : "Une erreur est survenue.";
+      msgInfo.style.color = 'red';
+      // Alerte de secours si le texte n'est pas vu
+      if (typeof erreur !== 'string') alert("Erreur technique : " + erreur);
     }
   });
 
-  function afficherErreur(msg) {
-    msgInfo.textContent = msg;
-    msgInfo.style.color = 'red';
-  }
-
-  // Initialisation
+  // Init
   majQuantites();
   calculerTotal();
+});
 </script>
-  
 </body>
 </html>
-
