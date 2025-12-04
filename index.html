@@ -744,7 +744,67 @@
   const btnEnvoyer = document.getElementById('btnEnvoyer');
   const msgInfo = document.getElementById('msgInfo');
 
-  let currentPhoneLength = 10; // longueur attendue pour le numéro local WhatsApp
+  // Ajuster la longueur du numéro WhatsApp en fonction du pays
+const longueurNumero = {
+  "Côte d'Ivoire": 10,
+  "Sénégal": 9,
+  "Mali": 8,
+  "Burkina Faso": 8,
+  "Togo": 8,
+  "Bénin": 8,
+  "Guinée": 9,
+  "Cameroun": 9,
+  "Congo": 9,
+  "RDC": 9,
+  "Maroc": 9,
+  "Algérie": 9,
+  "Tunisie": 8,
+  "France": 9,
+  "Belgique": 9,
+  "Suisse": 9,
+  "Allemagne": 10,
+  "Espagne": 9,
+  "Italie": 10,
+  "Portugal": 9,
+  "Pays-Bas": 9,
+  "Canada": 10,
+  "États-Unis": 10,
+  "Brésil": 11,
+  "Mexique": 10,
+  "Chine": 11,
+  "Japon": 10,
+  "Inde": 10,
+  "Corée du Sud": 10,
+  "Émirats Arabes Unis": 9
+};
+
+paysSelect.addEventListener('change', () => {
+  const pays = paysSelect.value;
+
+  // Déjà présent : gestion zones + indicatif
+  if (regionSelect.value === 'afrique' && pays === "Côte d'Ivoire") {
+    zoneCIBlock.style.display = 'block';
+  } else {
+    zoneCIBlock.style.display = 'none';
+    villeInterieurBlock.style.display = 'none';
+  }
+
+  // Indicatif déjà présent
+  if (indicatifParPays[pays]) {
+    indicatifSpan.textContent = indicatifParPays[pays];
+  } else {
+    indicatifSpan.textContent = "+";
+  }
+
+  // 👉 AJOUT : adapter la longueur du numéro WhatsApp
+  if (longueurNumero[pays]) {
+    whatsappClientInput.maxLength = longueurNumero[pays];
+    whatsappClientInput.placeholder = "0".repeat(longueurNumero[pays]);
+  } else {
+    whatsappClientInput.maxLength = 12; // valeur par défaut
+    whatsappClientInput.placeholder = "Numéro";
+  }
+});
 
   // Remplir pays selon région
   regionSelect.addEventListener('change', () => {
@@ -968,3 +1028,4 @@
 
 </body>
 </html>
+
